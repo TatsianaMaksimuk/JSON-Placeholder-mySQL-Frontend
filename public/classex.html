@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON PLACEHOLER UI</title>
+</head>
+
+<body>
+
+    <script>
+        const apiURL = "http://localhost:4500/api";
+
+        const isValidJSON = (str) => {
+            try {
+                JSON.parse(str);
+                return true
+            } catch (e) {
+                return false;
+            }
+        }
+
+        const clearResponseText = () => {
+            document.getElementById('response').innerText = '';
+        }
+
+        const clearInputs = () => {
+            document.getElementById('name').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('userId').value = '';
+            document.getElementById('website').value = '';
+            document.getElementById('phone').value = '';
+
+        }
+
+
+        const reqAllUsers = (
+            method //Get, post,delete
+        ) => {
+
+            //check if method provided is valid
+            if (!['GET', 'POST', 'DELETE'].includes(method)) {
+                alert('Invalid method used for request all Users')
+                return;
+            }
+
+            fetch(apiURL + '/users/sql/all', { method: method })
+                .then(response => response.text())
+                .then(data => {
+
+                    if (isValidJSON(data)) {
+                        const parseJSON = JSON.parse(data);
+                        document.getElementById("response").innerText = JSON.stringify(parseJSON, null, '\t');
+                    } else {
+                        document.getElementById('response').innerText = data;
+                    }
+
+                })
+                .catch(error => console.log(error));
+        }
+
+
+        const requestUserId = (method) => {
+            if (!['GET', 'POST', 'DELETE'].includes(method)) {
+                alert('Invalid method used for request all Users')
+                return;
+            }
+
+            const userId = document.getElementById("userId").value;
+
+            let errorMsg = '';
+            if (isNaN(userId)) {
+                errorMsg = "Please Enter a User ID. Must be a number."
+            } else if (userId < 1) {
+                errorMsg = "Please Enter a User ID. Must be greater than 0."
+            }
+            if (errorMsg !== '') {
+                document.getElementById('response').innerText = errorMsg;
+                return;
+            }
+
+            fetch(apiURL + '/users/sql/id/' + userId, { method: method })
+                .then(response => response.text())
+                .then(data => {
+                    if (isValidJSON(data)) {
+                        const parseJSON = JSON.parse(data);
+                        document.getElementById("response").innerText = JSON.stringify(parseJSON, null, '\t');
+                    } else {
+                        document.getElementById('response').innerText = data;
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    document.getElementById('response').innerText = error
+                })
+
+        }
+
+        const writeUserData = (method) => {
+            if (!['POST', 'PUT'].includes(method)) {
+                alert('Invalid method used for request all Users')
+                return;
+            }
+            const name = document.getElementById('name').value;
+            const userName = document.getElementById('username').value;
+            const userEmail = document.getElementById('email').value;
+            const userPhone = document.getElementById('phone').value;
+            const userWebsite = document.getElementById('website').value;
+
+            const userBody = {
+                name: name,
+                username: userName,
+                email: userEmail,
+                phone: userPhone,
+                website: userWebsite,
+            }
+
+            let errorMsg = [];
+            if (name === '') {
+                errorMsg = "Please Enter a valid Name."
+            }
+            if (userName === '') {
+                errorMsg = "Please Enter a valid Name."
+            }
+            if (userEmail === '') {
+                errorMsg = "Please Enter a valid Email."
+            }
+            if (userPhone === '') {
+                errorMsg = "Please Enter a valid Phone Number."
+            }
+            if (userWebsite === '') {
+                errorMsg = "Please Enter a valid Website."
+            }
+            if (method === 'PUT') {
+                userBody.id = parseInt(document.getElementById('userId').value);
+
+                if (isNaN(userBody.id)) {
+                    errorMsg.push("Please Enter a User ID. Must be a number.")
+                } else if (userBody.id < 1) {
+                    errorMsg.push("Please Enter a User ID. Must be greater than 0.")
+                }
+            }
+
+            if (errorMsg.length > 0) {
+                console.log(errorMsg);
+                document.getElementById('response').innerText = errorMsg.join('\n');
+                return;
+
+            }
+
+
+            const requestURL = apiURL + '/users' + (method === 'PUT' ? '/sql/id/' + userBody.id : '');
+            fetch(requestURL, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userBody)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (isValidJSON(data)) {
+                        const parseJSON = JSON.parse(data);
+                        document.getElementById('response').innerText = JSON.stringify(parseJSON, null, '\t');
+                    } else {
+                        document.getElementById('response').innerText = data;
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    document.getElementById('response').innerText = error;
+                })
+
+        }
+
+
+
+
+    </script>
+
+
+    <h1>JSON PLACEHOLER</h1>
+    <button onclick="reqAllUsers('GET')">Get All Users</button>
+    <br>
+    <button onclick="reqAllUsers('POST')">Post 10 Users</button>
+    <button onclick="reqAllUsers('DELETE')">Delete All Users</button>
+    <button onclick="clearResponseText()">Clear Response</button>
+    <div>
+        <input id="userId" type="text" placeholder="User ID">
+        <br>
+        <button onclick="requestUserId('GET')">Get User By ID</button>
+        <button onclick="requestUserId('DELETE')">Delete User By ID</button>
+    </div>
+    <div>
+        <input id="name" type="text" placeholder="Name" value="tempName">
+        <input id="username" type="text" placeholder="Username" value="tempUn">
+        <input id="email" type="text" placeholder="Email" value="tempEmail">
+        <input id="phone" type="text" placeholder="Phone" value="tempPhone">
+        <input id="website" type="text" placeholder="Website" value="tempWeb">
+    </div>
+    <div>
+
+        <button onclick="writeUserData('POST')">Create new user</button>
+        <button onclick="writeUserData('PUT')">Update User</button>
+    </div>
+
+
+
+
+    <p id="response"></p>
+
+
+</body>
+
+</html>
