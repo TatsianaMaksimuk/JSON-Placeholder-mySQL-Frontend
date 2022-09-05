@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>User Page</h1>
+    <div>
+        <button onclick="allUsersMethods('GET')">Get All Users</button>
+        <button onclick="clearResponseText()">Clear Response</button>
+        <button onclick="clearAllInputs()">Clear All Inputs</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="allUsersMethods('DELETE')">Delete All Users</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="allUsersMethods('POST')">Post 10 Users</button>
+    </div>
+    <br>
+    <div>
+        <input id="userId" type="text" placeholder="User ID">
+        <button onclick="userByIdMethods('GET')">Find User by ID</button>
+        <button onclick="userByIdMethods('DELETE')">Delete User By ID</button>
+    </div>
+    <br>
+    <div>
+        <input id="name" type="text" placeholder="Name" value="tempName">
+        <input id="username" type="text" placeholder="Username" value="tempUn">
+        <input id="email" type="text" placeholder="Email" value="tempEmail">
+        <input id="phone" type="text" placeholder="Phone" value="tempPhone">
+        <input id="website" type="text" placeholder="Website" value="tempWeb">
+    </div>
+    <br>
+    <div>
+        <button onclick="addNewUser('POST')">Create new user</button>
+        <button onclick="updateExistingUser('PUT')">Update User</button>
+    </div>
+    
+    <p id="response"></p>
+</body>
+<script src="user.js"></script>
+</html>

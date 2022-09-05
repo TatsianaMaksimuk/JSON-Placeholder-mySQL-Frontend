@@ -1,0 +1,25 @@
+{
+  "name": "json-placeholder-mysql-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for JSONplaceholder (SQL) API project\r (jphsql project)\r Simple frontend created using express + Vanilla HTML +JS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TatsianaMaksimuk/JSON-Placeholder-mySQL-Frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TatsianaMaksimuk/JSON-Placeholder-mySQL-Frontend/issues"
+  },
+  "homepage": "https://github.com/TatsianaMaksimuk/JSON-Placeholder-mySQL-Frontend#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
