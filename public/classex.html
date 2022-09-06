@@ -120,19 +120,19 @@
 
             let errorMsg = [];
             if (name === '') {
-                errorMsg = "Please Enter a valid Name."
+                errorMsg.push( "Please Enter a valid Name.")
             }
             if (userName === '') {
-                errorMsg = "Please Enter a valid Name."
+                errorMsg.push( "Please Enter a valid Name.")
             }
             if (userEmail === '') {
-                errorMsg = "Please Enter a valid Email."
+                errorMsg.push( "Please Enter a valid Email.")
             }
             if (userPhone === '') {
-                errorMsg = "Please Enter a valid Phone Number."
+                errorMsg.push( "Please Enter a valid Phone Number.")
             }
             if (userWebsite === '') {
-                errorMsg = "Please Enter a valid Website."
+                errorMsg.push("Please Enter a valid Website.")
             }
             if (method === 'PUT') {
                 userBody.id = parseInt(document.getElementById('userId').value);

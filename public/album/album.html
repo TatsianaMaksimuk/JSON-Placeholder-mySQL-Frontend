@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album</title>
+</head>
+<body>
+    <h1>Album Page</h1>
+    <div>
+        <button onclick="allAlbumsMethods('GET')">Get All Albums</button>
+        <button onclick="clearResponseText()">Clear Response</button>
+        <button onclick="clearAllInputs()">Clear All Inputs</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="allAlbumsMethods('DELETE')">Delete All Albums</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="allAlbumsMethods('POST')">Post More Albums</button>
+    </div>
+    <br>
+    <div>
+        <input id="albumId" type="text" placeholder="Album ID">
+        <button onclick="albumByIdMethods('GET')">Find Album by ID</button>
+        <button onclick="albumByIdMethods('DELETE')">Delete Album By ID</button>
+    </div>
+    <br>
+    <div>
+        <input id="title" type="text" placeholder="Title" value="tempTitle">
+        <input id="userId" type="text" placeholder="User ID" value="tempUserId">
+    </div>
+    <br>
+    <div>
+        <button onclick="addNewAlbum()">Create new album</button>
+        <button onclick="updateExistingAlbum()">Update Album</button>
+    </div>
+    
+    <p id="response"></p>
+</body>
+<script src="album.js"></script>
+</html>

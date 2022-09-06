@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo</title>
+</head>
+<body>
+    <h1>Photo Page</h1>
+    <div>
+        <button onclick="allPhotosMethods('GET')">Get All Photos</button>
+        <button onclick="clearResponseText()">Clear Response</button>
+        <button onclick="clearAllInputs()">Clear All Inputs</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="allPhotosMethods('DELETE')">Delete All Photos</button>
+    </div>
+    <br>
+    <div>
+        <button onclick="allPhotosMethods('POST')">Post more Photos</button>
+    </div>
+    <br>
+    <div>
+        <input id="photoId" type="text" placeholder="Photo ID">
+        <button onclick="photoByIdMethods('GET')">Find Photo by ID</button>
+        <button onclick="photoByIdMethods('DELETE')">Delete Photo By ID</button>
+    </div>
+    <br>
+    <div>
+        <input id="albumId" type="text" placeholder="Album ID" value="tempID">
+        <input id="title" type="text" placeholder="Title" value="tempTitle">
+        <input id="url" type="text" placeholder="Link" value="tempURL">
+    </div>
+    <br>
+    <div>
+        <button onclick="addNewPhoto()">Create new Photo</button>
+        <button onclick="updateExistingPhoto()">Update Photo</button>
+    </div>
+    
+    <p id="response"></p>
+</body>
+<script src="photo.js"></script>
+</html>
